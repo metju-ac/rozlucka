@@ -219,13 +219,13 @@
 
     .info-row {
       display: grid;
-      grid-template-columns: 44px 1fr;
-      gap: 8px;
+      grid-template-columns: 50px 1fr;
+      gap: 6px;
       align-items: start;
       margin: 0 0 9px;
     }
     .ico { display: grid; place-items: center; padding-top: 2px; }
-    .ico img { display: block; max-width: 44px; height: auto; }
+    .ico img { display: block; max-width: 48px; height: auto; }
     .label { color: var(--label); font-weight: 700; display: block; }
     .info-row small { display: block; font-size: 13px; opacity: .85; }
     .program { margin: 4px 0 0 16px; padding: 0; }
@@ -240,7 +240,9 @@
       margin: 0 0 12px;
     }
     .packing .ico { padding-top: 0; }
-    .packing .ico img { max-width: 60px; }
+    .packing .ico img { max-width: 64px; }
+    .packing li p { margin: 0 0 8px; }
+    .packing li p:last-child { margin-bottom: 0; }
 
     .sheet-link {
       display: block;
@@ -332,8 +334,7 @@
             <div class="phead"><h2>Co s sebou</h2></div>
             <div class="pbody">
               <ul class="packing">
-                <li><div class="ico"><img src="assets/ui/ic-sleep.png" alt="" /></div><span>Přespolní a noční cesty domů neschopní <strong>spacák a karimatku</strong>.</span></li>
-                <li><div class="ico"><img src="assets/ui/ic-tent.png" alt="" /></div><span>Buď se dá spát přímo na loděnici, případně můžeme udělat noclehárnu u nás doma (Marťas, noční přesun na lodi zavrhuju).</span></li>
+                <li><div class="ico"><img src="assets/ui/ic-sleep.png" alt="" /></div><span><p>Přespolní a noční cesty domů neschopní <strong>spacák a karimatku</strong>.</p><p>Buď se dá spát přímo na loděnici, případně můžeme udělat noclehárnu u nás doma (Marťas, noční přesun na lodi zavrhuju).</p></span></li>
                 <li><div class="ico"><img src="assets/ui/ic-beer.png" alt="" /></div><span>Pivo bude zařízené, pak si každý prosím doneste, co máte rádi.</span></li>
                 <li><div class="ico"><img src="assets/ui/ic-burger.png" alt="" /></div><span>Něco málo k jídlu se pokusím zařídit, ale když přinesete upečený šneky nebo tak něco, tak to bude určitě vítaný.</span></li>
               </ul>
