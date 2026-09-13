@@ -5,9 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rozlučka před Asií</title>
   <meta name="description" content="Informace k rozlučce před odletem do jihovýchodní Asie." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@600&display=swap" />
   <style>
+    @font-face {
+      font-family: "Fira Sans Condensed";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("assets/fonts/fira-sans-condensed-600-latin-ext.woff2") format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: "Fira Sans Condensed";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("assets/fonts/fira-sans-condensed-600-latin.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
     :root {
       --gold: #ffd21c;
       --gold-dark: #b8860b;
@@ -177,7 +192,7 @@
       top: 9px;
       height: 44px;
       margin: 0;
-      padding: 0 6px 0 4px;
+      padding: 0 6px 0 2px;
       display: flex;
       align-items: center;
       color: #fff;
@@ -186,10 +201,10 @@
       text-shadow: 1px 1px 0 rgba(0,0,0,.75), 0 0 6px rgba(0,0,0,.45);
       overflow: hidden;
     }
-    .panel:nth-child(1) { --hl: url("assets/ui/h1-left.png"); --hl-w: 91px; --hm: url("assets/ui/h1-mid.png"); --hr: url("assets/ui/h1-right.png"); --hr-w: 25px; --el: url("assets/ui/e1-left.png"); --er: url("assets/ui/e1-right.png"); --title-size: 17px; }
-    .panel:nth-child(2) { --hl: url("assets/ui/h2-left.png"); --hl-w: 85px; --hm: url("assets/ui/h2-mid.png"); --hr: url("assets/ui/h2-right.png"); --hr-w: 141px; --el: url("assets/ui/e2-left.png"); --er: url("assets/ui/e2-right.png"); }
-    .panel:nth-child(3) { --hl: url("assets/ui/h3-left.png"); --hl-w: 91px; --hm: url("assets/ui/h3-mid.png"); --hr: url("assets/ui/h3-right.png"); --hr-w: 91px; --el: url("assets/ui/e3-left.png"); --er: url("assets/ui/e3-right.png"); }
-    .panel:nth-child(4) { --hl: url("assets/ui/h4-left.png"); --hl-w: 88px; --hm: url("assets/ui/h4-mid.png"); --hr: url("assets/ui/h4-right.png"); --hr-w: 95px; --el: url("assets/ui/e4-left.png"); --er: url("assets/ui/e4-right.png"); }
+    .panel:nth-child(1) { --hl: url("assets/ui/h1-left.png"); --hl-w: 96px; --hm: url("assets/ui/h1-mid.png"); --hr: url("assets/ui/h1-right.png"); --hr-w: 27px; --el: url("assets/ui/e1-left.png"); --er: url("assets/ui/e1-right.png"); --title-size: 17px; }
+    .panel:nth-child(2) { --hl: url("assets/ui/h2-left.png"); --hl-w: 92px; --hm: url("assets/ui/h2-mid.png"); --hr: url("assets/ui/h2-right.png"); --hr-w: 141px; --el: url("assets/ui/e2-left.png"); --er: url("assets/ui/e2-right.png"); }
+    .panel:nth-child(3) { --hl: url("assets/ui/h3-left.png"); --hl-w: 96px; --hm: url("assets/ui/h3-mid.png"); --hr: url("assets/ui/h3-right.png"); --hr-w: 91px; --el: url("assets/ui/e3-left.png"); --er: url("assets/ui/e3-right.png"); }
+    .panel:nth-child(4) { --hl: url("assets/ui/h4-left.png"); --hl-w: 94px; --hm: url("assets/ui/h4-mid.png"); --hr: url("assets/ui/h4-right.png"); --hr-w: 95px; --el: url("assets/ui/e4-left.png"); --er: url("assets/ui/e4-right.png"); }
 
     /* tělo = boční hrany rámu jako opakující se dlaždice, uvnitř text */
     .pbody {
