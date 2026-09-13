@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rozlučka před Asií</title>
   <meta name="description" content="Informace k rozlučce před odletem do jihovýchodní Asie." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@600&display=swap" />
   <style>
     :root {
       --gold: #ffd21c;
@@ -145,8 +147,8 @@
     .content-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      padding: 14px 12px 16px;
+      gap: 10px;
+      padding: 10px 10px 12px;
       align-items: stretch;
     }
 
@@ -155,112 +157,90 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      border-radius: 14px;
-      border: 4px solid var(--gold);
-      background:
-        radial-gradient(circle at 12px 12px, rgba(255,190,0,.08) 0 2px, transparent 2.4px) 0 0/24px 24px,
-        linear-gradient(#fff9e6, #ffeec4);
-      box-shadow:
-        0 0 0 2px #7a0000,
-        0 0 0 5px #ffb000,
-        0 0 0 7px var(--red),
-        0 0 12px 8px rgba(255,200,0,.35),
-        inset 0 0 22px rgba(196,91,0,.2);
-      overflow: hidden;
+      background: #f6e7c3 url("assets/ui/cream.png");
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.55));
     }
 
-    .panel h2 {
-      margin: 10px 10px 0;
-      padding: 7px 14px 7px 8px;
+    /* hlavička = levý cap (rám + emblém + číslo) | roztažený proužek | pravý cap (ikona + rám) */
+    .phead {
+      position: relative;
+      height: 62px;
+      background:
+        var(--hl) left top / auto 62px no-repeat,
+        var(--hr) right top / auto 62px no-repeat,
+        var(--hm) left top / auto 62px repeat-x;
+    }
+    .phead h2 {
+      position: absolute;
+      left: var(--hl-w);
+      right: var(--hr-w);
+      top: 9px;
+      height: 44px;
+      margin: 0;
+      padding: 0 6px 0 4px;
       display: flex;
       align-items: center;
-      gap: 9px;
       color: #fff;
-      font: 900 clamp(15px, 1.7vw, 18px)/1.1 "Arial Black", Arial, sans-serif;
-      text-shadow: 2px 2px 0 rgba(0,0,0,.6), 0 0 8px rgba(255,255,255,.5);
-      border: 3px solid var(--gold);
-      border-radius: 40px;
-      background: var(--head);
-      box-shadow: 0 0 0 2px #5a0000, inset 0 12px 12px -6px rgba(255,255,255,.45), 0 3px 6px rgba(0,0,0,.4);
+      font: 600 var(--title-size, 20px)/1.05 "Fira Sans Condensed", "Arial Narrow", "Segoe UI", Arial, sans-serif;
+      letter-spacing: .2px;
+      text-shadow: 1px 1px 0 rgba(0,0,0,.75), 0 0 6px rgba(0,0,0,.45);
+      overflow: hidden;
     }
-    .panel h2 .num {
-      flex: 0 0 auto;
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      display: grid; place-items: center;
-      background: radial-gradient(circle at 35% 30%, #fff6b0, #f5b800 60%, #a86800);
-      color: #b00000;
-      border: 2px solid #7a0000;
-      font: 900 15px/1 Arial, sans-serif;
-      text-shadow: none;
-    }
-    .panel h2 .emblem {
-      flex: 0 0 auto;
-      font-size: 22px;
-      filter: drop-shadow(1px 1px 0 #000);
-    }
-    .panel h2 .title { flex: 1 1 auto; min-width: 0; }
-    .panel h2 .right { margin-left: auto; }
-    .panel:nth-child(1) h2 { --head: linear-gradient(#22b8b4, #0a6d7a); }
-    .panel:nth-child(1) h2 .title { font-size: .88em; }
-    .panel:nth-child(2) h2 { --head: linear-gradient(#3c8fff, #0b2fb0); }
-    .panel:nth-child(3) h2 { --head: linear-gradient(#2fcf73, #0a7a3a); }
-    .panel:nth-child(4) h2 { --head: linear-gradient(#b455ff, #5a0e9e); }
+    .panel:nth-child(1) { --hl: url("assets/ui/h1-left.png"); --hl-w: 91px; --hm: url("assets/ui/h1-mid.png"); --hr: url("assets/ui/h1-right.png"); --hr-w: 25px; --el: url("assets/ui/e1-left.png"); --er: url("assets/ui/e1-right.png"); --title-size: 17px; }
+    .panel:nth-child(2) { --hl: url("assets/ui/h2-left.png"); --hl-w: 85px; --hm: url("assets/ui/h2-mid.png"); --hr: url("assets/ui/h2-right.png"); --hr-w: 141px; --el: url("assets/ui/e2-left.png"); --er: url("assets/ui/e2-right.png"); }
+    .panel:nth-child(3) { --hl: url("assets/ui/h3-left.png"); --hl-w: 91px; --hm: url("assets/ui/h3-mid.png"); --hr: url("assets/ui/h3-right.png"); --hr-w: 91px; --el: url("assets/ui/e3-left.png"); --er: url("assets/ui/e3-right.png"); }
+    .panel:nth-child(4) { --hl: url("assets/ui/h4-left.png"); --hl-w: 88px; --hm: url("assets/ui/h4-mid.png"); --hr: url("assets/ui/h4-right.png"); --hr-w: 95px; --el: url("assets/ui/e4-left.png"); --er: url("assets/ui/e4-right.png"); }
 
-    .panel .body {
-      padding: 14px 18px 8px;
+    /* tělo = boční hrany rámu jako opakující se dlaždice, uvnitř text */
+    .pbody {
+      flex: 1 1 auto;
+      padding: 10px 26px 8px 28px;
+      background: var(--el) left top repeat-y, var(--er) right top repeat-y;
       font-size: 15px;
       line-height: 1.45;
-      flex: 1 1 auto;
     }
-    .panel p { margin: 0 0 12px; }
-    .panel ul { margin: 6px 0 0 18px; padding: 0; }
-    .panel li { margin: 0 0 8px; }
+    .pbody p { margin: 0 0 12px; }
 
-    .art {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin-top: auto;
+    /* spodní pás = ilustrace včetně rámu a rohů */
+    .pfoot { display: block; width: 100%; height: auto; }
+    .pfoot-plain {
+      height: 24px;
+      background:
+        url("assets/ui/f2-left.png") left top no-repeat,
+        url("assets/ui/f2-right.png") right top no-repeat,
+        url("assets/ui/f2-mid.png") left top repeat-x;
     }
-    .art-float {
+    .photo {
       float: right;
-      width: 160px;
-      max-width: 45%;
+      width: 98px;
       height: auto;
-      margin: -4px -6px 8px 12px;
-      border: 3px solid var(--gold);
-      border-radius: 6px;
-      box-shadow: 0 0 0 2px #7a0000, 2px 3px 6px rgba(0,0,0,.45);
+      margin: -10px -14px 8px 12px;
     }
 
     .info-row {
       display: grid;
-      grid-template-columns: 34px 1fr;
-      gap: 10px;
+      grid-template-columns: 44px 1fr;
+      gap: 8px;
       align-items: start;
-      margin: 0 0 8px;
+      margin: 0 0 9px;
     }
-    .ico {
-      font-size: 27px;
-      line-height: 1;
-      text-align: center;
-      filter: drop-shadow(1px 2px 0 rgba(0,0,0,.25));
-    }
-    .label { color: var(--label); font-weight: 900; display: block; }
+    .ico { display: grid; place-items: center; padding-top: 2px; }
+    .ico img { display: block; max-width: 44px; height: auto; }
+    .label { color: var(--label); font-weight: 700; display: block; }
     .info-row small { display: block; font-size: 13px; opacity: .85; }
-    .program { margin-left: 18px !important; }
+    .program { margin: 4px 0 0 16px; padding: 0; }
     .program li { margin: 0 0 6px; font-size: 13.5px; line-height: 1.4; }
 
-    .packing { list-style: none; margin: 0 !important; padding: 0; }
+    .packing { list-style: none; margin: 0; padding: 0; }
     .packing li {
       display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 12px;
+      grid-template-columns: 64px 1fr;
+      gap: 10px;
       align-items: center;
-      margin: 0 0 14px;
+      margin: 0 0 12px;
     }
-    .packing .pack-icon { font-size: 32px; line-height: 1; text-align: center; filter: drop-shadow(1px 2px 0 rgba(0,0,0,.25)); }
+    .packing .ico { padding-top: 0; }
+    .packing .ico img { max-width: 60px; }
 
     .sheet-link {
       display: block;
@@ -283,7 +263,10 @@
       .layout { grid-template-columns: 1fr; }
       .side { display: none; }
       .nav { grid-template-columns: repeat(2, 1fr); }
-      .art-float { float: none; display: block; width: 100%; max-width: none; margin: 0 0 10px; }
+      .pbody { padding: 10px 20px 8px 22px; }
+      .photo { margin-right: -8px; }
+      .panel:nth-child(2) { --title-size: 17px; }
+      .panel:nth-child(1) { --title-size: 15.5px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -318,23 +301,23 @@
         <section class="content-grid" aria-label="Obsah rozlučky">
 
           <article class="panel" id="proc">
-            <h2><span class="emblem">🌸</span><span class="num">1.</span><span class="title">Matěji, proč máš kurva tuhle doménu???</span><span class="emblem right">🌸</span></h2>
-            <div class="body">
+            <div class="phead"><h2>Matěji, proč máš kurva tuhle doménu???</h2></div>
+            <div class="pbody">
               <p>Když ještě na Hradě seděl Zeman, bývala tahle doména přesměrovaná na kancelář prezidenta.</p>
               <p>Já jsem si na to nedávno vzpomněl, šel se podívat, kam je to přesměrovaný teď a zjistil jsem, že je doména volná, což jsem tak samozřejmě nemohl nechat.</p>
               <p>Po rozlučce bych jí rád dal starej účel, takže přijímám rady, jestli to mám přesměrovat na Rajchla nebo Macinku.</p>
             </div>
-            <img class="art" src="assets/art-domena.png" alt="" />
+            <img class="pfoot" src="assets/ui/f1.png" alt="" />
           </article>
 
           <article class="panel" id="info">
-            <h2><span class="emblem">🧭</span><span class="num">2.</span><span class="title">Základní informace</span></h2>
-            <div class="body">
-              <img class="art-float" src="assets/art-info.png" alt="Pardubice, loděnice" />
-              <div class="info-row"><div class="ico">📅</div><div><span class="label">Datum:</span>sobota 26. 9. 2026</div></div>
-              <div class="info-row"><div class="ico">📍</div><div><span class="label">Místo:</span>Pardubice, naše stará hnusná loděnice.</div></div>
-              <div class="info-row"><div class="ico">🚗</div><div><span class="label">Autem se tam dostanete takhle:</span><a href="https://mapy.com/s/pebuneraze" target="_blank" rel="noopener noreferrer">mapy.com/s/pebuneraze</a><small>(neděste se cyklostezky, je to legit)</small></div></div>
-              <div class="info-row"><div class="ico">📋</div><div><span class="label">Program:</span>
+            <div class="phead"><h2>Základní informace</h2></div>
+            <div class="pbody">
+              <img class="photo" src="assets/ui/photo2.png" alt="Pardubice, loděnice" />
+              <div class="info-row"><div class="ico"><img src="assets/ui/ic-calendar.png" alt="" /></div><div><span class="label">Datum:</span>sobota 26. 9. 2026</div></div>
+              <div class="info-row"><div class="ico"><img src="assets/ui/ic-pin.png" alt="" /></div><div><span class="label">Místo:</span>Pardubice, naše stará hnusná loděnice.</div></div>
+              <div class="info-row"><div class="ico"><img src="assets/ui/ic-car.png" alt="" /></div><div><span class="label">Autem se tam dostanete takhle:</span><a href="https://mapy.com/s/pebuneraze" target="_blank" rel="noopener noreferrer">mapy.com/s/pebuneraze</a><small>(neděste se cyklostezky, je to legit)</small></div></div>
+              <div class="info-row"><div class="ico"><img src="assets/ui/ic-clipboard.png" alt="" /></div><div><span class="label">Program:</span>
                 <ul class="program">
                   <li>Pokud byste se někdo chtěli přijít podívat, tak ve <strong>12:20</strong> zakončuju na polabinský pouti svojí hudební kariéru v jazzbandu.</li>
                   <li>Aby to nevypadalo blbě, že se sem někteří táhnete přes půl republiky jenom kvůli večerní chlastačce, nabízím pro zájemce od <strong>15:00</strong> projížďku na kanoích, sraz už na loděnici. Pro případ špatnýho počasí zkusím vymyslet alternativu.</li>
@@ -342,29 +325,31 @@
                 </ul>
               </div></div>
             </div>
+            <div class="pfoot-plain"></div>
           </article>
 
           <article class="panel" id="sebou">
-            <h2><span class="emblem">🌿</span><span class="num">3.</span><span class="title">Co s sebou</span><span class="emblem right">🎒</span></h2>
-            <div class="body">
+            <div class="phead"><h2>Co s sebou</h2></div>
+            <div class="pbody">
               <ul class="packing">
-                <li><span class="pack-icon">🛏️</span><span>Přespolní a noční cesty domů neschopní <strong>spacák a karimatku</strong>. Buď se dá spát přímo na loděnici, případně můžeme udělat noclehárnu u nás doma (Marťas, noční přesun na lodi zavrhuju).</span></li>
-                <li><span class="pack-icon">🍻</span><span>Pivo bude zařízené, pak si každý prosím doneste, co máte rádi.</span></li>
-                <li><span class="pack-icon">🍔</span><span>Něco málo k jídlu se pokusím zařídit, ale když přinesete upečený šneky nebo tak něco, tak to bude určitě vítaný.</span></li>
+                <li><div class="ico"><img src="assets/ui/ic-sleep.png" alt="" /></div><span>Přespolní a noční cesty domů neschopní <strong>spacák a karimatku</strong>.</span></li>
+                <li><div class="ico"><img src="assets/ui/ic-tent.png" alt="" /></div><span>Buď se dá spát přímo na loděnici, případně můžeme udělat noclehárnu u nás doma (Marťas, noční přesun na lodi zavrhuju).</span></li>
+                <li><div class="ico"><img src="assets/ui/ic-beer.png" alt="" /></div><span>Pivo bude zařízené, pak si každý prosím doneste, co máte rádi.</span></li>
+                <li><div class="ico"><img src="assets/ui/ic-burger.png" alt="" /></div><span>Něco málo k jídlu se pokusím zařídit, ale když přinesete upečený šneky nebo tak něco, tak to bude určitě vítaný.</span></li>
               </ul>
             </div>
-            <img class="art" src="assets/art-sebou.png" alt="" />
+            <img class="pfoot" src="assets/ui/f3.png" alt="" />
           </article>
 
           <article class="panel" id="app">
-            <h2><span class="emblem">🏆</span><span class="num">4.</span><span class="title">Remembeer testování</span><span class="emblem right">🍺</span></h2>
-            <div class="body">
+            <div class="phead"><h2>Remembeer testování</h2></div>
+            <div class="pbody">
               <p>Na rozlučce zároveň proběhne první test <strong>Remembeeru</strong>.</p>
               <p>Kdo by nevěděl, tak je to aplikace, kde si můžete zapisovat, co, kde a s kým pijete, sdílet to s kámošema a předhánět se ve výkonech. Jo, a taky z toho jednoho dne snad budou 2 diplomky.</p>
               <p>Abyste si mohli appku nainstalovat, zapište se prosím předem do tabulky, pošleme vám pozvánku.</p>
-              <div class="info-row"><div class="ico">📊</div><div><span class="label">Tabulka:</span><a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1reMqmJtjR5Qho7_BE2S6YL4aoweLr52Fg07OjyzTE4g/edit?usp=sharing" target="_blank" rel="noopener noreferrer">docs.google.com/spreadsheets/d/1reMqmJtjR5Qho7_BE2S6YL4aoweLr52Fg07OjyzTE4g/edit</a></div></div>
+              <div class="info-row"><div class="ico"><img src="assets/ui/ic-sheet.png" alt="" /></div><div><span class="label">Tabulka:</span><a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1reMqmJtjR5Qho7_BE2S6YL4aoweLr52Fg07OjyzTE4g/edit?usp=sharing" target="_blank" rel="noopener noreferrer">docs.google.com/spreadsheets/d/1reMqmJtjR5Qho7_BE2S6YL4aoweLr52Fg07OjyzTE4g/edit</a></div></div>
             </div>
-            <img class="art" src="assets/art-app.png" alt="" />
+            <img class="pfoot" src="assets/ui/f4.png" alt="" />
           </article>
 
         </section>
