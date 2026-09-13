@@ -486,6 +486,23 @@
       .burst { width: 56px; height: 56px; font-size: 9px; }
     }
 
+    /* mávající maneki-neko po stranách (jen na širokých obrazovkách) */
+    .neko {
+      position: fixed;
+      bottom: clamp(14px, 26vh, 300px);
+      width: clamp(140px, calc(50vw - 523px - 28px), 300px);
+      height: auto;
+      z-index: 55;
+      pointer-events: none;
+      display: none;
+      filter: sepia(1) saturate(4.5) hue-rotate(-14deg) brightness(1.08) contrast(1.05) drop-shadow(0 0 14px rgba(255,200,0,.85)) drop-shadow(3px 6px 4px rgba(0,0,0,.55));
+      animation: nekobob 2.6s ease-in-out infinite alternate;
+    }
+    .neko.left { left: 14px; }
+    .neko.right { right: 14px; transform: scaleX(-1); animation-delay: 1.3s; }
+    @keyframes nekobob { from { translate: 0 0; } to { translate: 0 -8px; } }
+    @media (min-width: 1380px) { .neko { display: block; } }
+
     /* ---------- efekty ---------- */
     .blink { animation: blink .75s steps(2, end) infinite; }
     @keyframes blink { 50% { opacity: .15; } }
@@ -644,6 +661,10 @@
     <div class="rope"></div>
     <img src="assets/plane.png" alt="" />
   </div>
+
+  <!-- maneki-neko: Openclipart #316158 (CC0), https://openclipart.org/detail/316158 -->
+  <img class="neko left" src="assets/neko.svg" alt="" aria-hidden="true" />
+  <img class="neko right" src="assets/neko.svg" alt="" aria-hidden="true" />
 
   <div class="petals" aria-hidden="true">
     <span style="--x:4%;--s:20px;--d:13s;--delay:0s"><i>🌸</i></span>
