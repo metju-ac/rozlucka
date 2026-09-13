@@ -81,7 +81,7 @@
     /* ---------- prostřední řádek: lišta | obsah | lišta ---------- */
     .layout {
       display: grid;
-      grid-template-columns: 8.03% minmax(0, 1fr) 7.74%; /* 84 / 881 / 81 z 1046 */
+      grid-template-columns: 8.22% minmax(0, 1fr) 8.51%; /* 86 / 871 / 89 z 1046 */
     }
 
     .side {
@@ -152,7 +152,7 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 8px;
-      padding: 9px 8px;
+      padding: 9px 6px;
       background: linear-gradient(#150000, #3a0000 45%, #150000);
       border-top: 3px ridge var(--gold);
       border-bottom: 3px ridge var(--gold);
@@ -235,9 +235,11 @@
     .content-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 10px 10px 12px;
+      grid-template-rows: auto 1fr;
+      gap: 9px;
+      padding: 10px 4px 12px;
       align-items: stretch;
+      flex: 1 1 auto;
     }
 
     .panel {
@@ -295,7 +297,7 @@
     /* spodní pás = ilustrace včetně rámu a rohů */
     .pfoot { display: block; width: 100%; height: auto; }
     .pfoot-plain {
-      height: 24px;
+      height: 27px;
       background:
         url("assets/ui/f2-left.png") left top no-repeat,
         url("assets/ui/f2-right.png") right top no-repeat,
