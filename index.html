@@ -107,10 +107,18 @@
       text-transform: uppercase;
       text-shadow: 1px 1px 0 #000, 0 0 6px rgba(0,0,0,.7);
       box-shadow: 0 0 0 2px #000, 0 0 10px 2px var(--glow), inset 0 12px 10px -6px rgba(255,255,255,.7), inset 0 -8px 10px -6px rgba(0,0,0,.5);
-      background: var(--btn);
+      background:
+        linear-gradient(105deg, transparent 40%, rgba(255,255,255,.85) 50%, transparent 60%) var(--shine-x, 250%) 0 / 250% 100% no-repeat,
+        var(--btn);
       position: relative;
       white-space: nowrap;
+      animation: shine 4.5s ease-in-out infinite;
+      animation-delay: calc(var(--i, 0) * .55s);
     }
+    .nav a:nth-child(1) { --i: 0; } .nav a:nth-child(2) { --i: 1; } .nav a:nth-child(3) { --i: 2; }
+    .nav a:nth-child(4) { --i: 3; } .nav a:nth-child(5) { --i: 4; } .nav a:nth-child(6) { --i: 5; }
+    @keyframes shine { 0%, 55% { --shine-x: 250%; } 85%, 100% { --shine-x: -150%; } }
+    @property --shine-x { syntax: "<percentage>"; inherits: false; initial-value: 250%; }
     .nav a i {
       font-style: normal;
       display: inline-grid;
@@ -265,6 +273,149 @@
       font-size: 14px;
     }
 
+    /* ---------- parádičky: letadlo, jiskry, květy, světýlka ---------- */
+    .hero-wrap { position: relative; }
+    .hero-wrap .fx { position: absolute; pointer-events: none; }
+    .lights {
+      left: 1%; right: 1%; top: 0; height: 6%;
+      background:
+        radial-gradient(circle, #fff 0 14%, #ff2fc4 28%, transparent 46%) 0 50% / 26px 100% repeat-x,
+        radial-gradient(circle, #fff 0 14%, #00e5ff 28%, transparent 46%) 13px 50% / 26px 100% repeat-x;
+      mix-blend-mode: screen;
+      animation: lightsA .7s steps(2, end) infinite;
+    }
+    .lights.b {
+      background:
+        radial-gradient(circle, #fff 0 14%, #ffe600 28%, transparent 46%) 6px 50% / 26px 100% repeat-x,
+        radial-gradient(circle, #fff 0 14%, #39ff14 28%, transparent 46%) 19px 50% / 26px 100% repeat-x;
+      animation: lightsB .7s steps(2, end) infinite;
+    }
+    @keyframes lightsA { 50% { opacity: .15; } }
+    @keyframes lightsB { 0%, 49% { opacity: .15; } 50%, 100% { opacity: 1; } }
+    .glow-buddha {
+      left: 74%; top: 38%; width: 26%; height: 62%;
+      background: radial-gradient(circle, rgba(255,235,130,.6), rgba(255,180,0,.25) 45%, transparent 68%);
+      mix-blend-mode: screen;
+      animation: breathe 2.4s ease-in-out infinite alternate;
+    }
+    .glow-neon {
+      left: 20%; top: 46%; width: 60%; height: 32%;
+      background: radial-gradient(ellipse, rgba(255,70,210,.5), rgba(255,0,150,.15) 55%, transparent 75%);
+      mix-blend-mode: screen;
+      animation: neonbuzz 3.6s infinite;
+    }
+    @keyframes breathe { from { opacity: .35; transform: scale(.94); } to { opacity: 1; transform: scale(1.06); } }
+    @keyframes neonbuzz { 0%, 17%, 21%, 24%, 58%, 62%, 100% { opacity: 1; } 19%, 23%, 60% { opacity: .2; } 80% { opacity: .75; } }
+
+    /* letadlo s transparentem: dva lety, jeden zprava doleva nahoře, druhý zleva doprava níž */
+    .flyer {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 60;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      will-change: transform;
+      animation: flyLeft 30s linear infinite both;
+    }
+    .flyer img { width: 150px; height: auto; filter: drop-shadow(4px 6px 3px rgba(0,0,0,.45)); animation: bob 1.8s ease-in-out infinite alternate; }
+    .flyer .rope { width: 34px; height: 0; border-top: 2px dashed #fff; opacity: .8; }
+    .flyer .banner {
+      background: #fff;
+      color: #c8001c;
+      border: 3px solid #c8001c;
+      box-shadow: 0 0 0 2px #ffd21c, 3px 4px 0 rgba(0,0,0,.4);
+      padding: 6px 12px;
+      font: 900 13px/1 "Arial Black", Arial, sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      animation: sway 1.4s ease-in-out infinite alternate;
+    }
+    .flyer.b { animation: flyRight 30s linear infinite both; animation-delay: 15s; }
+    .flyer.b img { transform: scaleX(-1); }
+    @keyframes flyLeft {
+      0% { transform: translate(100vw, 6vh) rotate(0deg); }
+      22% { transform: translate(38vw, 10vh) rotate(-3deg); }
+      45% { transform: translate(-900px, 4vh) rotate(2deg); }
+      45.01%, 100% { transform: translate(100vw, 6vh); }
+    }
+    @keyframes flyRight {
+      0% { transform: translate(-900px, 58vh) rotate(0deg); }
+      22% { transform: translate(35vw, 62vh) rotate(3deg); }
+      45% { transform: translate(100vw, 55vh) rotate(-2deg); }
+      45.01%, 100% { transform: translate(-900px, 58vh); }
+    }
+    @keyframes bob { from { translate: 0 0; } to { translate: 0 -10px; } }
+    @keyframes sway { from { transform: rotate(-2deg) translateY(2px); } to { transform: rotate(2deg) translateY(-3px); } }
+
+    /* padající květy přes celou obrazovku */
+    .petals { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+    .petals span {
+      position: absolute;
+      top: -40px;
+      left: var(--x);
+      font-size: var(--s, 18px);
+      opacity: .9;
+      filter: drop-shadow(0 0 3px rgba(0,0,0,.35));
+      animation: fall var(--d, 12s) linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    .petals span i { display: inline-block; font-style: normal; animation: flutter 2.2s ease-in-out infinite alternate; }
+    @keyframes fall { to { transform: translateY(calc(100vh + 60px)); } }
+    @keyframes flutter { from { transform: translateX(-18px) rotate(-30deg); } to { transform: translateX(18px) rotate(30deg); } }
+
+    /* jiskry na bočních lištách */
+    .side { position: relative; }
+    .side .tw {
+      position: absolute;
+      left: var(--x); top: var(--y);
+      color: var(--c, #fff);
+      font-size: 18px;
+      line-height: 1;
+      text-shadow: 0 0 6px var(--c, #fff), 0 0 14px var(--c, #fff);
+      animation: twinkle 1.6s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      pointer-events: none;
+    }
+    @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.4) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(90deg); } }
+
+    /* jiskřičky za kurzorem */
+    .spark {
+      position: fixed;
+      z-index: 999;
+      pointer-events: none;
+      font-size: 16px;
+      line-height: 1;
+      text-shadow: 0 0 6px currentColor;
+      transform: translate(-50%, -50%);
+      animation: sparkfall .9s ease-out forwards;
+    }
+    @keyframes sparkfall { to { transform: translate(calc(-50% + var(--dx, 0px)), 40px) scale(.2) rotate(180deg); opacity: 0; } }
+
+    /* rotující hvězdice na panelu 4 */
+    .burst {
+      position: absolute;
+      top: -8px; right: -6px;
+      width: 70px; height: 70px;
+      z-index: 5;
+      background: radial-gradient(circle at 40% 35%, #fff9a0, #ffe600 55%, #ff9900);
+      clip-path: polygon(50% 0%, 61% 15%, 79% 6%, 82% 25%, 100% 30%, 90% 46%, 100% 62%, 82% 68%, 79% 88%, 61% 80%, 50% 100%, 39% 80%, 21% 88%, 18% 68%, 0% 62%, 10% 46%, 0% 30%, 18% 25%, 21% 6%, 39% 15%);
+      display: grid; place-items: center;
+      font: 900 11px/1.1 "Arial Black", Arial, sans-serif;
+      color: #d00000;
+      text-align: center;
+      animation: wobble 1.1s ease-in-out infinite alternate;
+    }
+    @keyframes wobble { from { transform: rotate(-14deg) scale(.96); } to { transform: rotate(10deg) scale(1.06); } }
+
+    @media (max-width: 640px) {
+      .flyer img { width: 96px; }
+      .flyer .banner { font-size: 10px; padding: 4px 8px; }
+      .burst { width: 56px; height: 56px; font-size: 9px; }
+    }
+
     /* ---------- efekty ---------- */
     .blink { animation: blink .75s steps(2, end) infinite; }
     @keyframes blink { 50% { opacity: .15; } }
@@ -293,12 +444,28 @@
 </head>
 <body>
   <main class="page" id="top">
-    <img class="hero" src="assets/hero.png" alt="Rozlučka před Asií: poslední pár drinků, než zmizím do jihovýchodní Asie" />
+    <div class="hero-wrap">
+      <img class="hero" src="assets/hero.png" alt="Rozlučka před Asií: poslední pár drinků, než zmizím do jihovýchodní Asie" />
+      <div class="fx lights" aria-hidden="true"></div>
+      <div class="fx lights b" aria-hidden="true"></div>
+      <div class="fx glow-neon" aria-hidden="true"></div>
+      <div class="fx glow-buddha" aria-hidden="true"></div>
+    </div>
 
     <div class="layout">
       <aside class="side" aria-hidden="true">
         <img src="assets/side-left-top.png" alt="" />
         <img class="bottom" src="assets/side-left-bottom.png" alt="" />
+        <span class="tw" style="--x:8%;--y:4%;--c:#fff;--delay:0s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:70%;--y:9%;--c:#ffe600;--delay:0.4s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:20%;--y:18%;--c:#ff2fc4;--delay:0.9s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:78%;--y:27%;--c:#fff;--delay:1.2s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:10%;--y:41%;--c:#00e5ff;--delay:0.3s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:72%;--y:52%;--c:#ffe600;--delay:0.7s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:15%;--y:63%;--c:#fff;--delay:1.4s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:75%;--y:74%;--c:#ff2fc4;--delay:0.2s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:30%;--y:86%;--c:#ffe600;--delay:1.0s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:70%;--y:95%;--c:#fff;--delay:0.6s" aria-hidden="true">✦</span>
       </aside>
 
       <div class="main">
@@ -358,7 +525,7 @@
           </article>
 
           <article class="panel" id="app">
-            <div class="phead"><h2>Remembeer testování</h2></div>
+            <div class="phead"><h2>Remembeer testování</h2><div class="burst" aria-hidden="true">BETA<br>TEST!</div></div>
             <div class="pbody">
               <p>Na rozlučce zároveň proběhne první test <strong>Remembeeru</strong>.</p>
               <p>Kdo by nevěděl, tak je to aplikace, kde si můžete zapisovat, co, kde a s kým pijete, sdílet to s kámošema a předhánět se ve výkonech. Jo, a taky z toho jednoho dne snad budou 2 diplomky.</p>
@@ -374,10 +541,80 @@
       <aside class="side" aria-hidden="true">
         <img src="assets/side-right-top.png" alt="" />
         <img class="bottom" src="assets/side-right-bottom.png" alt="" />
+        <span class="tw" style="--x:70%;--y:3%;--c:#ffe600;--delay:0.5s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:12%;--y:12%;--c:#fff;--delay:1.1s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:76%;--y:22%;--c:#ff2fc4;--delay:0.2s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:14%;--y:33%;--c:#00e5ff;--delay:0.8s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:72%;--y:44%;--c:#fff;--delay:1.3s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:10%;--y:56%;--c:#ffe600;--delay:0.4s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:74%;--y:66%;--c:#ff2fc4;--delay:1.0s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:16%;--y:77%;--c:#fff;--delay:0.1s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:70%;--y:88%;--c:#00e5ff;--delay:0.9s" aria-hidden="true">✦</span>
+        <span class="tw" style="--x:20%;--y:96%;--c:#ffe600;--delay:0.6s" aria-hidden="true">✦</span>
       </aside>
     </div>
 
     <img class="footer-img" src="assets/footer-band.png" alt="Next stop: Southeast Asia. Chlastáme dnes, vyprávíme navždy. Děkuju všem, že jste součástí tohohle šílenství!" />
   </main>
+
+  <!-- letadlo: Openclipart #174207 "funny airplane" (CC0), https://openclipart.org/detail/174207 -->
+  <div class="flyer a" aria-hidden="true">
+    <img src="assets/plane.png" alt="" />
+    <div class="rope"></div>
+    <div class="banner">✈ Rozlučka 26. 9. 2026 ✈ <span class="blink">Pivo zajištěno!</span></div>
+  </div>
+  <div class="flyer b" aria-hidden="true">
+    <div class="banner"><span class="blink">Next stop:</span> Southeast Asia ✈</div>
+    <div class="rope"></div>
+    <img src="assets/plane.png" alt="" />
+  </div>
+
+  <div class="petals" aria-hidden="true">
+    <span style="--x:4%;--s:20px;--d:13s;--delay:0s"><i>🌸</i></span>
+    <span style="--x:13%;--s:16px;--d:16s;--delay:-4s"><i>🌺</i></span>
+    <span style="--x:22%;--s:22px;--d:11s;--delay:-8s"><i>✨</i></span>
+    <span style="--x:31%;--s:18px;--d:15s;--delay:-2s"><i>🌸</i></span>
+    <span style="--x:40%;--s:14px;--d:17s;--delay:-11s"><i>🍺</i></span>
+    <span style="--x:49%;--s:20px;--d:12s;--delay:-6s"><i>🌺</i></span>
+    <span style="--x:58%;--s:16px;--d:14s;--delay:-13s"><i>✨</i></span>
+    <span style="--x:66%;--s:22px;--d:16s;--delay:-3s"><i>🌸</i></span>
+    <span style="--x:74%;--s:18px;--d:13s;--delay:-9s"><i>🌺</i></span>
+    <span style="--x:82%;--s:15px;--d:18s;--delay:-1s"><i>✨</i></span>
+    <span style="--x:90%;--s:20px;--d:12s;--delay:-7s"><i>🌸</i></span>
+    <span style="--x:96%;--s:16px;--d:15s;--delay:-12s"><i>🌺</i></span>
+  </div>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      // blikající titulek záložky
+      var titles = ['✈ Rozlučka před Asií ✈', '🍺 26. 9. 2026 – Pardubice 🍺', '🌴 NEXT STOP: SOUTHEAST ASIA 🌴'];
+      var t = 0;
+      setInterval(function () { t = (t + 1) % titles.length; document.title = titles[t]; }, 1500);
+
+      // jiskřičky za kurzorem
+      if (matchMedia('(pointer: fine)').matches) {
+        var glyphs = ['✦', '✧', '★', '✨', '♥'];
+        var colors = ['#ff2fc4', '#ffe600', '#00e5ff', '#39ff14', '#ffffff'];
+        var last = 0;
+        document.addEventListener('mousemove', function (e) {
+          var now = performance.now();
+          if (now - last < 45) return;
+          last = now;
+          var s = document.createElement('span');
+          s.className = 'spark';
+          s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+          s.style.left = e.clientX + 'px';
+          s.style.top = e.clientY + 'px';
+          s.style.color = colors[Math.floor(Math.random() * colors.length)];
+          s.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+          document.body.appendChild(s);
+          s.addEventListener('animationend', function () { s.remove(); });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
