@@ -807,6 +807,8 @@
     <img src="assets/plane.png" alt="" />
   </div>
 
+  <audio id="bgm" src="assets/audio/audio.mp3" loop preload="auto"></audio>
+
   <div class="popup-backdrop" id="popup" hidden>
     <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
       <div class="popup-title">
@@ -870,6 +872,20 @@
       }
       tick();
       setInterval(tick, 1000);
+
+      // hudba na pozadí: zkusí autoplay, když ho prohlížeč zablokuje, spustí se prvním kliknutím/klávesou
+      var bgm = document.getElementById('bgm');
+      bgm.volume = 1;
+      try { var t0 = parseFloat(sessionStorage.getItem('rozlucka-bgm-t')); if (t0 > 0) bgm.currentTime = t0; } catch (e) {}
+      function onGesture() { bgm.play().catch(function () {}); }
+      function armGesture() {
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (ev) {
+          document.addEventListener(ev, onGesture, { once: true, capture: true, passive: true });
+        });
+      }
+      var playAttempt = bgm.play();
+      if (playAttempt && playAttempt.catch) playAttempt.catch(armGesture);
+      setInterval(function () { if (!bgm.paused) { try { sessionStorage.setItem('rozlucka-bgm-t', String(bgm.currentTime)); } catch (e) {} } }, 2000);
 
       // vyskakovací okno s tabulkou a playlistem
       var popup = document.getElementById('popup');
